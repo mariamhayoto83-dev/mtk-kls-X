@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eksplorasi Dunia Lingkaran - Matematika XI SMAN 46 Maluku Tengah</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .bg-navy-900 { background-color: #0f172a; }
+        .bg-navy-800 { background-color: #1e293b; }
+        .bg-navy-700 { background-color: #334155; }
+        .text-cyan-custom { color: #38bdf8; }
+        .bg-cyan-custom { background-color: #0284c7; }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+        canvas {
+            touch-action: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- HEADER / NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 bg-navy-800/90 backdrop-blur-md border-b border-slate-700/50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('beranda')">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-cyan-500/30">
+                    <i class="fa-solid fa-circle-notch animate-spin-slow"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent leading-tight">MATEMATIKA INTERAKTIF</h1>
+                    <p class="text-xs text-slate-400">Eksplorasi Dunia Lingkaran • SMAN 46 Maluku Tengah</p>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation Menu -->
+            <nav class="hidden lg:flex items-center space-x-1 text-sm font-medium">
+                <button onclick="showPage('beranda')" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-700/50 transition text-slate-300 hover:text-cyan-400"><i class="fa-solid fa-house mr-1.5"></i>Beranda</button>
+                <button onclick="showPage('capaian')" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-700/50 transition text-slate-300 hover:text-cyan-400"><i class="fa-solid fa-bullseye mr-1.5"></i>CP & TP</button>
+                <div class="relative group">
+                    <button class="px-3 py-2 rounded-lg hover:bg-slate-700/50 transition text-slate-300 hover:text-cyan-400 flex items-center">
+                        <i class="fa-solid fa-book-open mr-1.5"></i>Materi <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-56 bg-navy-800 border border-slate-700 rounded-xl shadow-2xl py-2 hidden group-hover:block z-50">
+                        <a href="#" onclick="showPage('unsur')" class="block px-4 py-2 text-sm text-slate-300 hover:bg-cyan-600 hover:text-white transition"><i class="fa-solid fa-shapes mr-2"></i>1. Unsur Lingkaran</a>
+                        <a href="#" onclick="showPage('sudut')" class="block px-4 py-2 text-sm text-slate-300 hover:bg-cyan-600 hover:text-white transition"><i class="fa-solid fa-compass mr-2"></i>2. Sudut Pusat & Keliling</a>
+                        <a href="#" onclick="showPage('busur-juring')" class="block px-4 py-2 text-sm text-slate-300 hover:bg-cyan-600 hover:text-white transition"><i class="fa-solid fa-chart-pie mr-2"></i>3. Busur & Juring</a>
+                        <a href="#" onclick="showPage('garis-singgung')" class="block px-4 py-2 text-sm text-slate-300 hover:bg-cyan-600 hover:text-white transition"><i class="fa-solid fa-ruler-combined mr-2"></i>4. Garis Singgung</a>
+                    </div>
+                </div>
+                <button onclick="showPage('lab')" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-700/50 transition text-slate-300 hover:text-cyan-400"><i class="fa-solid fa-flask mr-1.5"></i>Virtual Lab</button>
+                <button onclick="showPage('contoh-soal')" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-700/50 transition text-slate-300 hover:text-cyan-400"><i class="fa-solid fa-lightbulb mr-1.5"></i>Contoh Soal</button>
+                <button onclick="showPage('game')" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-700/50 transition text-amber-400 hover:text-amber-300 font-semibold"><i class="fa-solid fa-gamepad mr-1.5"></i>Game</button>
+                <button onclick="showPage('latihan')" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-700/50 transition text-slate-300 hover:text-cyan-400"><i class="fa-solid fa-pen-to-square mr-1.5"></i>Latihan</button>
+                <button onclick="showPage('evaluasi')" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-700/50 transition text-emerald-400 hover:text-emerald-300 font-semibold"><i class="fa-solid fa-graduation-cap mr-1.5"></i>Evaluasi</button>
+                <button onclick="showPage('refleksi')" class="nav-btn px-3 py-2 rounded-lg hover:bg-slate-700/50 transition text-slate-300 hover:text-cyan-400"><i class="fa-solid fa-comment-dots mr-1.5"></i>Refleksi</button>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <div class="flex items-center lg:hidden space-x-2">
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="p-2 rounded-lg bg-slate-700 text-slate-200 hover:bg-slate-600 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-navy-800 border-b border-slate-700 px-4 py-3 space-y-2 text-sm">
+            <button onclick="showPage('beranda')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200"><i class="fa-solid fa-house w-6"></i>Beranda</button>
+            <button onclick="showPage('capaian')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200"><i class="fa-solid fa-bullseye w-6"></i>CP & TP</button>
+            <button onclick="showPage('unsur')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200"><i class="fa-solid fa-shapes w-6"></i>Unsur Lingkaran</button>
+            <button onclick="showPage('sudut')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200"><i class="fa-solid fa-compass w-6"></i>Sudut Pusat & Keliling</button>
+            <button onclick="showPage('busur-juring')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200"><i class="fa-solid fa-chart-pie w-6"></i>Panjang Busur & Luas Juring</button>
+            <button onclick="showPage('garis-singgung')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200"><i class="fa-solid fa-ruler-combined w-6"></i>Garis Singgung</button>
+            <button onclick="showPage('lab')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200"><i class="fa-solid fa-flask w-6"></i>Virtual Lab</button>
+            <button onclick="showPage('contoh-soal')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200"><i class="fa-solid fa-lightbulb w-6"></i>Contoh Soal</button>
+            <button onclick="showPage('game')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-amber-400 font-semibold"><i class="fa-solid fa-gamepad w-6"></i>Game Edukasi</button>
+            <button onclick="showPage('latihan')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200"><i class="fa-solid fa-pen-to-square w-6"></i>Latihan Soal</button>
+            <button onclick="showPage('evaluasi')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-emerald-400 font-semibold"><i class="fa-solid fa-graduation-cap w-6"></i>Evaluasi Mandiri</button>
+            <button onclick="showPage('refleksi')" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-700 text-slate-200"><i class="fa-solid fa-comment-dots w-6"></i>Refleksi</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- 1. HALAMAN BERANDA -->
+        <section id="page-beranda" class="page-content block">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[calc(100vh-12rem)]">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-medium">
+                        <i class="fa-solid fa-sparkles mr-2"></i> Media Pembelajaran Digital Kurikulum Merdeka
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                        Eksplorasi Dunia <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-400 bg-clip-text text-transparent">LINGKARAN</span>
+                    </h1>
+                    <p class="text-slate-300 text-lg leading-relaxed">
+                        Selamat datang di aplikasi interaktif pembelajaran Matematika. Jelajahi konsep-konsep geometri lingkaran secara visual, interaktif, dan menyenangkan khusus untuk siswa kelas XI SMA.
+                    </p>
+                    
+                    <div class="p-4 rounded-2xl glass-card border border-slate-700/60 space-y-2">
+                        <div class="flex items-center space-x-3 text-slate-300">
+                            <i class="fa-solid fa-school text-cyan-400 w-5"></i>
+                            <span class="font-semibold text-white">SMA Negeri 46 Maluku Tengah</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-300">
+                            <i class="fa-solid fa-users text-amber-400 w-5"></i>
+                            <span>Kelas XI A & Kelas XI B</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-300">
+                            <i class="fa-solid fa-chalkboard-user text-emerald-400 w-5"></i>
+                            <span>Guru Pengampu: <strong class="text-white">Mariam Hayoto, S.Pd.</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="showPage('unsur')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold shadow-lg shadow-cyan-500/25 transition transform hover:-translate-y-0.5 flex items-center">
+                            <i class="fa-solid fa-play mr-2.5"></i> MULAI BELAJAR
+                        </button>
+                        <button onclick="openModal('modal-petunjuk')" class="px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold transition flex items-center">
+                            <i class="fa-solid fa-circle-info mr-2.5"></i> PETUNJUK PENGGUNAAN
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center">
+                        <!-- Decorative Animated Rings -->
+                        <div class="absolute inset-0 rounded-full border-4 border-dashed border-cyan-500/30 animate-[spin_20s_linear_infinite]"></div>
+                        <div class="absolute inset-4 rounded-full border-2 border-dashed border-amber-500/30 animate-[spin_15s_linear_infinite_reverse]"></div>
+                        <div class="absolute inset-12 rounded-full border-2 border-emerald-500/30 animate-[ping_4s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
+                        <!-- Center Graphic -->
+                        <div class="relative z-10 w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-gradient-to-tr from-cyan-600/40 to-blue-600/40 backdrop-blur-xl border border-white/20 flex flex-col items-center justify-center shadow-2xl glow-effect text-center p-4">
+                            <i class="fa-solid fa-compass-drafting text-6xl text-cyan-400 mb-2"></i>
+                            <span class="text-xs text-slate-300 font-medium tracking-widest uppercase">GEOMETRI XI</span>
+                            <span class="text-xl font-bold text-white">Lingkaran</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. MENU CAPAIAN DAN TUJUAN PEMBELAJARAN -->
+        <section id="page-capaian" class="page-content hidden space-y-8">
+            <div class="border-b border-slate-700 pb-4">
+                <h2 class="text-3xl font-bold text-white flex items-center">
+                    <i class="fa-solid fa-bullseye text-cyan-400 mr-3"></i> Capaian & Tujuan Pembelajaran
+                </h2>
+                <p class="text-slate-400 mt-1">Panduan arah belajar materi lingkaran Kurikulum Merdeka kelas XI SMA.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- CP -->
+                <div class="glass-card p-6 rounded-2xl border-l-4 border-cyan-500">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+                        <i class="fa-solid fa-graduation-cap mr-2"></i> Capaian Pembelajaran (CP)
+                    </h3>
+                    <p class="text-slate-300 leading-relaxed text-justify">
+                        Di akhir fase F, peserta didik dapat menerapkan teorema tentang lingkaran, dan menentukan panjang busur serta luas juring lingkaran untuk menyelesaikan masalah (termasuk menentukan posisi relatif garis terhadap lingkaran). Peserta didik juga dapat menerapkan konsep lingkaran dalam pemecahan masalah kontekstual kehidupan sehari-hari.
+                    </p>
+                </div>
+
+                <!-- TP -->
+                <div class="glass-card p-6 rounded-2xl border-l-4 border-amber-500">
+                    <h3 class="text-xl font-bold text-amber-400 mb-3 flex items-center">
+                        <i class="fa-solid fa-list-check mr-2"></i> Tujuan Pembelajaran (TP)
+                    </h3>
+                    <ul class="text-slate-300 space-y-2 text-sm">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-amber-400 mt-1 mr-2"></i> Mengidentifikasi unsur-unsur lingkaran (pusat, jari-jari, diameter, busur, tali busur, juring, tembereng, apotema, garis singgung).</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-amber-400 mt-1 mr-2"></i> Menentukan hubungan dan membandingkan besar sudut pusat dengan sudut keliling.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-amber-400 mt-1 mr-2"></i> Menghitung panjang busur dan luas juring lingkaran.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-amber-400 mt-1 mr-2"></i> Menganalisis sifat garis singgung lingkaran dan menghitung panjang garis singgung persekutuan.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-amber-400 mt-1 mr-2"></i> Menyelesaikan masalah kontekstual yang melibatkan lingkaran.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- IKTP -->
+            <div class="glass-card p-6 rounded-2xl border-l-4 border-emerald-500">
+                <h3 class="text-xl font-bold text-emerald-400 mb-4 flex items-center">
+                    <i class="fa-solid fa-bars-staggered mr-2"></i> Indikator Ketercapaian Tujuan Pembelajaran (IKTP)
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-navy-800/80 p-3.5 rounded-xl border border-slate-700 text-sm text-slate-300">
+                        <strong class="text-cyan-400 block mb-1">1. Konseptual Unsur</strong> Menunjukkan dan menjelaskan 9 unsur dasar lingkaran secara visual.
+                    </div>
+                    <div class="bg-navy-800/80 p-3.5 rounded-xl border border-slate-700 text-sm text-slate-300">
+                        <strong class="text-cyan-400 block mb-1">2. Teorema Sudut</strong> Mengukur & membuktikan sudut pusat = 2 × sudut keliling yang menghadap busur sama.
+                    </div>
+                    <div class="bg-navy-800/80 p-3.5 rounded-xl border border-slate-700 text-sm text-slate-300">
+                        <strong class="text-cyan-400 block mb-1">3. Panjang Busur</strong> Menghitung panjang busur dengan rasio sudut per 360°.
+                    </div>
+                    <div class="bg-navy-800/80 p-3.5 rounded-xl border border-slate-700 text-sm text-slate-300">
+                        <strong class="text-cyan-400 block mb-1">4. Luas Juring</strong> Menghitung luas juring proporsional terhadap luas total lingkaran.
+                    </div>
+                    <div class="bg-navy-800/80 p-3.5 rounded-xl border border-slate-700 text-sm text-slate-300">
+                        <strong class="text-cyan-400 block mb-1">5. Garis Singgung</strong> Menentukan panjang garis singgung persekutuan dalam dan luar 2 lingkaran.
+                    </div>
+                    <div class="bg-navy-800/80 p-3.5 rounded-xl border border-slate-700 text-sm text-slate-300">
+                        <strong class="text-cyan-400 block mb-1">6. Pemecahan Masalah</strong> Mengaplikasikan rumus lingkaran pada masalah dunia nyata.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PETA KONSEP -->
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <i class="fa-solid fa-sitemap text-cyan-400 mr-2"></i> Peta Konsep Materi Lingkaran
+                </h3>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 p-4 bg-navy-800/60 rounded-xl border border-slate-700 text-center">
+                    <div class="bg-cyan-600/30 border border-cyan-500/50 p-3 rounded-xl w-full">
+                        <strong class="text-cyan-300">UNSUR LINGKARAN</strong>
+                        <p class="text-xs text-slate-400 mt-1">Titik Pusat, Jari-jari, Diameter, Busur, Tali Busur, Juring, Tembereng, Apotema</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-slate-500 hidden md:block"></i>
+                    <i class="fa-solid fa-arrow-down text-slate-500 md:hidden"></i>
+                    <div class="bg-blue-600/30 border border-blue-500/50 p-3 rounded-xl w-full">
+                        <strong class="text-blue-300">SUDUT LINGKARAN</strong>
+                        <p class="text-xs text-slate-400 mt-1">Sudut Pusat & Sudut Keliling (Sudut Pusat = 2 × Sudut Keliling)</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-slate-500 hidden md:block"></i>
+                    <i class="fa-solid fa-arrow-down text-slate-500 md:hidden"></i>
+                    <div class="bg-emerald-600/30 border border-emerald-500/50 p-3 rounded-xl w-full">
+                        <strong class="text-emerald-300">PANJANG & LUAS</strong>
+                        <p class="text-xs text-slate-400 mt-1">Panjang Busur & Luas Juring Lingkaran</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-slate-500 hidden md:block"></i>
+                    <i class="fa-solid fa-arrow-down text-slate-500 md:hidden"></i>
+                    <div class="bg-amber-600/30 border border-amber-500/50 p-3 rounded-xl w-full">
+                        <strong class="text-amber-300">GARIS SINGGUNG</strong>
+                        <p class="text-xs text-slate-400 mt-1">Garis Singgung Titik & Persekutuan Dua Lingkaran</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MENU PENGENALAN LINGKARAN (UNSUR-UNSUR INTERAKTIF) -->
+        <section id="page-unsur" class="page-content hidden space-y-6">
+            <div class="border-b border-slate-700 pb-4">
+                <h2 class="text-3xl font-bold text-white flex items-center">
+                    <i class="fa-solid fa-shapes text-cyan-400 mr-3"></i> Pengenalan & Unsur-Unsur Lingkaran
+                </h2>
+                <p class="text-slate-400 mt-1">Klik tombol unsur di bawah atau langsung pada diagram lingkaran untuk mempelajari komponen geometri lingkaran.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <!-- Interactive Canvas Visualizer -->
+                <div class="lg:col-span-7 glass-card p-4 rounded-2xl flex flex-col items-center justify-center">
+                    <h3 class="text-sm font-semibold text-cyan-400 mb-2">Diagram Interactive Unsur Lingkaran</h3>
+                    <div class="relative w-full max-w-md aspect-square flex items-center justify-center bg-navy-900/60 rounded-xl border border-slate-700 p-2">
+                        <canvas id="canvasUnsur" class="w-full h-full cursor-pointer"></canvas>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-2 text-center">Petunjuk: Klik pada tombol di kanan/bawah untuk menyorot bagian lingkaran.</p>
+                </div>
+
+                <!-- Unsur Selector Buttons & Info Display -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="selectUnsur('pusat')" class="btn-unsur px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-cyan-600 hover:text-white border border-slate-700 transition" id="btn-pusat">Titik Pusat (O)</button>
+                        <button onclick="selectUnsur('jari')" class="btn-unsur px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-cyan-600 hover:text-white border border-slate-700 transition" id="btn-jari">Jari-Jari (r)</button>
+                        <button onclick="selectUnsur('diameter')" class="btn-unsur px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-cyan-600 hover:text-white border border-slate-700 transition" id="btn-diameter">Diameter (d)</button>
+                        <button onclick="selectUnsur('busur')" class="btn-unsur px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-cyan-600 hover:text-white border border-slate-700 transition" id="btn-busur">Busur</button>
+                        <button onclick="selectUnsur('talibusur')" class="btn-unsur px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-cyan-600 hover:text-white border border-slate-700 transition" id="btn-talibusur">Tali Busur</button>
+                        <button onclick="selectUnsur('juring')" class="btn-unsur px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-cyan-600 hover:text-white border border-slate-700 transition" id="btn-juring">Juring</button>
+                        <button onclick="selectUnsur('tembereng')" class="btn-unsur px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-cyan-600 hover:text-white border border-slate-700 transition" id="btn-tembereng">Tembereng</button>
+                        <button onclick="selectUnsur('apotema')" class="btn-unsur px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-cyan-600 hover:text-white border border-slate-700 transition" id="btn-apotema">Apotema</button>
+                        <button onclick="selectUnsur('garissinggung')" class="btn-unsur px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-cyan-600 hover:text-white border border-slate-700 transition" id="btn-garissinggung">Garis Singgung</button>
+                    </div>
+
+                    <!-- Info Box Display -->
+                    <div id="unsurInfoBox" class="glass-card p-5 rounded-2xl border-l-4 border-cyan-400 space-y-3 min-h-[220px]">
+                        <h3 id="unsurTitle" class="text-xl font-bold text-cyan-400">Pilih Salah Satu Unsur Lingkaran</h3>
+                        <p id="unsurDesc" class="text-slate-300 text-sm leading-relaxed">Silakan klik salah satu tombol unsur lingkaran di atas untuk melihat visualisasi dan deskripsi mendalam mengenai unsur tersebut.</p>
+                        <div id="unsurFormula" class="bg-navy-900/80 p-3 rounded-lg text-xs font-mono text-amber-300 border border-slate-700/60 hidden">
+                            <!-- Formula info -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. MENU SUDUT PUSAT DAN SUDUT KELILING -->
+        <section id="page-sudut" class="page-content hidden space-y-6">
+            <div class="border-b border-slate-700 pb-4">
+                <h2 class="text-3xl font-bold text-white flex items-center">
+                    <i class="fa-solid fa-compass text-cyan-400 mr-3"></i> Sudut Pusat & Sudut Keliling
+                </h2>
+                <p class="text-slate-400 mt-1">Eksplorasi hubungan antara sudut yang berpusat di O dan sudut keliling pada lengkung lingkaran.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Interactive Canvas Sudut -->
+                <div class="lg:col-span-7 glass-card p-4 rounded-2xl flex flex-col items-center">
+                    <h3 class="text-sm font-semibold text-cyan-400 mb-2">Simulasi Sudut Dinamis (Geser titik A, B, atau C)</h3>
+                    <div class="relative w-full max-w-md aspect-square bg-navy-900/60 rounded-xl border border-slate-700 p-2 flex items-center justify-center">
+                        <canvas id="canvasSudut" class="w-full h-full cursor-pointer"></canvas>
+                    </div>
+                    <div class="mt-4 flex flex-wrap justify-center gap-4 text-xs">
+                        <span class="inline-flex items-center text-cyan-400"><i class="fa-solid fa-circle text-cyan-400 mr-1 text-[8px]"></i> Sudut Pusat (&theta;)</span>
+                        <span class="inline-flex items-center text-amber-400"><i class="fa-solid fa-circle text-amber-400 mr-1 text-[8px]"></i> Sudut Keliling (&psi;)</span>
+                    </div>
+                </div>
+
+                <!-- Theory and Values Display -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="glass-card p-5 rounded-2xl space-y-3">
+                        <h3 class="text-lg font-bold text-white border-b border-slate-700 pb-2">Hasil Pengukuran Real-Time</h3>
+                        
+                        <div class="flex justify-between items-center p-3 bg-navy-900/70 rounded-xl border border-cyan-500/30">
+                            <span class="text-slate-300 text-sm">Sudut Pusat (&theta;):</span>
+                            <span id="valSudutPusat" class="text-xl font-bold text-cyan-400">0°</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-navy-900/70 rounded-xl border border-amber-500/30">
+                            <span class="text-slate-300 text-sm">Sudut Keliling (&psi;):</span>
+                            <span id="valSudutKeliling" class="text-xl font-bold text-amber-400">0°</span>
+                        </div>
+
+                        <div class="p-3 bg-emerald-950/40 border border-emerald-500/40 rounded-xl text-center">
+                            <span class="text-xs text-emerald-300 block">Hubungan Matematik:</span>
+                            <strong class="text-sm text-emerald-400 font-mono">Sudut Pusat = 2 &times; Sudut Keliling</strong>
+                        </div>
+                    </div>
+
+                    <!-- Theoretical Properties -->
+                    <div class="glass-card p-5 rounded-2xl space-y-3 text-sm text-slate-300">
+                        <h4 class="font-bold text-white flex items-center"><i class="fa-solid fa-book text-cyan-400 mr-2"></i> Sifat-Sifat Sudut Keliling:</h4>
+                        <ul class="space-y-2 list-disc list-inside text-xs text-slate-300">
+                            <li>Sudut keliling yang menghadap <strong>busur yang sama</strong> memiliki besar sudut yang <strong>sama besar</strong>.</li>
+                            <li>Sudut keliling yang menghadap <strong>diameter lingkaran</strong> selalu membentuk sudut siku-siku (<strong>90°</strong>).</li>
+                            <li>Jumlah sudut berhadapan pada <strong>segi empat tali busur</strong> adalah <strong>180°</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MENU PANJANG BUSUR DAN LUAS JURING -->
+        <section id="page-busur-juring" class="page-content hidden space-y-6">
+            <div class="border-b border-slate-700 pb-4">
+                <h2 class="text-3xl font-bold text-white flex items-center">
+                    <i class="fa-solid fa-chart-pie text-cyan-400 mr-3"></i> Panjang Busur & Luas Juring
+                </h2>
+                <p class="text-slate-400 mt-1">Pahami perhitungan bagian keliling (busur) dan bagian luas (juring) lingkaran.</p>
+            </div>
+
+            <!-- Formulas Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-card p-5 rounded-2xl border-t-4 border-cyan-400 space-y-3">
+                    <h3 class="text-lg font-bold text-cyan-400 flex items-center"><i class="fa-solid fa-ruler text-cyan-400 mr-2"></i> Rumus Panjang Busur (s)</h3>
+                    <div class="p-4 bg-navy-900 rounded-xl text-center font-mono text-cyan-300 text-lg border border-slate-700">
+                        s = (&theta; / 360°) &times; 2 &times; &pi; &times; r
+                    </div>
+                    <p class="text-xs text-slate-300">Panjang busur adalah bagian dari keliling lingkaran yang dibatasi oleh dua titik pada lingkaran sesuai sudut pusat &theta;.</p>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl border-t-4 border-amber-400 space-y-3">
+                    <h3 class="text-lg font-bold text-amber-400 flex items-center"><i class="fa-solid fa-pie-chart text-amber-400 mr-2"></i> Rumus Luas Juring (L)</h3>
+                    <div class="p-4 bg-navy-900 rounded-xl text-center font-mono text-amber-300 text-lg border border-slate-700">
+                        L = (&theta; / 360°) &times; &pi; &times; r²
+                    </div>
+                    <p class="text-xs text-slate-300">Luas juring adalah daerah di dalam lingkaran yang dibatasi oleh dua jari-jari dan satu busur lingkaran.</p>
+                </div>
+            </div>
+
+            <!-- Interactive Slider Simulation -->
+            <div class="glass-card p-6 rounded-2xl space-y-6">
+                <h3 class="text-xl font-bold text-white flex items-center"><i class="fa-solid fa-sliders text-cyan-400 mr-2"></i> Simulasi Interaktif Perhitungan</h3>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <div class="lg:col-span-6 space-y-5">
+                        <!-- Radius Slider -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <label class="text-slate-300 font-medium">Jari-Jari (r):</label>
+                                <span id="lblRadius" class="text-cyan-400 font-bold font-mono">14 cm</span>
+                            </div>
+                            <input type="range" id="inputRadius" min="1" max="50" value="14" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-400" oninput="updateBusurJuringSim()">
+                        </div>
+
+                        <!-- Angle Slider -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <label class="text-slate-300 font-medium">Sudut Pusat (&theta;):</label>
+                                <span id="lblAngle" class="text-amber-400 font-bold font-mono">60°</span>
+                            </div>
+                            <input type="range" id="inputAngle" min="1" max="360" value="60" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-400" oninput="updateBusurJuringSim()">
+                        </div>
+
+                        <!-- Calculated Results Output -->
+                        <div class="grid grid-cols-2 gap-4 pt-2">
+                            <div class="bg-navy-900/80 p-4 rounded-xl border border-cyan-500/30">
+                                <span class="text-xs text-slate-400 block">Panjang Busur (s):</span>
+                                <span id="resBusur" class="text-2xl font-bold text-cyan-400 font-mono">14.66 cm</span>
+                            </div>
+                            <div class="bg-navy-900/80 p-4 rounded-xl border border-amber-500/30">
+                                <span class="text-xs text-slate-400 block">Luas Juring (L):</span>
+                                <span id="resJuring" class="text-2xl font-bold text-amber-400 font-mono">102.63 cm²</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Representation Canvas -->
+                    <div class="lg:col-span-6 flex justify-center">
+                        <div class="relative w-full max-w-xs aspect-square bg-navy-900/60 rounded-xl border border-slate-700 p-2 flex items-center justify-center">
+                            <canvas id="canvasBusurJuring" class="w-full h-full"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. MENU GARIS SINGGUNG LINGKARAN -->
+        <section id="page-garis-singgung" class="page-content hidden space-y-6">
+            <div class="border-b border-slate-700 pb-4">
+                <h2 class="text-3xl font-bold text-white flex items-center">
+                    <i class="fa-solid fa-ruler-combined text-cyan-400 mr-3"></i> Garis Singgung Lingkaran
+                </h2>
+                <p class="text-slate-400 mt-1">Konsep garis tegak lurus jari-jari pada titik singgung & garis singgung persekutuan dua lingkaran.</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="flex space-x-2 border-b border-slate-700 pb-2">
+                <button onclick="switchGarisTab('persekutuan-luar')" id="tab-luar" class="px-4 py-2 rounded-lg text-sm font-semibold bg-cyan-600 text-white transition">Persekutuan Luar (GSPL)</button>
+                <button onclick="switchGarisTab('persekutuan-dalam')" id="tab-dalam" class="px-4 py-2 rounded-lg text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Persekutuan Dalam (GSPD)</button>
+            </div>
+
+            <!-- GSPL Section -->
+            <div id="content-gspl" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 glass-card p-4 rounded-2xl flex flex-col items-center">
+                    <h3 class="text-sm font-semibold text-cyan-400 mb-2">Garis Singgung Persekutuan Luar (GSPL)</h3>
+                    <div class="relative w-full max-w-md aspect-[4/3] bg-navy-900/60 rounded-xl border border-slate-700 p-2 flex items-center justify-center">
+                        <canvas id="canvasGSPL" class="w-full h-full"></canvas>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 glass-card p-5 rounded-2xl space-y-4">
+                    <h3 class="text-xl font-bold text-cyan-400">Rumus GSPL</h3>
+                    <div class="p-4 bg-navy-900 rounded-xl text-center font-mono text-cyan-300 text-lg border border-slate-700">
+                        d² = p² - (R - r)²
+                    </div>
+                    <ul class="text-xs text-slate-300 space-y-1.5">
+                        <li><strong>d</strong> = Panjang garis singgung persekutuan luar</li>
+                        <li><strong>p</strong> = Jarak antara kedua titik pusat lingkaran</li>
+                        <li><strong>R</strong> = Jari-jari lingkaran besar</li>
+                        <li><strong>r</strong> = Jari-jari lingkaran kecil</li>
+                    </ul>
+
+                    <div class="p-3 bg-slate-800/80 rounded-xl border border-slate-700 text-xs text-slate-300">
+                        <strong class="text-white block mb-1">Contoh Kasus:</strong>
+                        Jika R = 8 cm, r = 3 cm, dan jarak p = 13 cm, maka:<br>
+                        d² = 13² - (8 - 3)² = 169 - 25 = 144<br>
+                        d = &radic;144 = <strong>12 cm</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- GSPD Section -->
+            <div id="content-gspd" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start hidden">
+                <div class="lg:col-span-7 glass-card p-4 rounded-2xl flex flex-col items-center">
+                    <h3 class="text-sm font-semibold text-amber-400 mb-2">Garis Singgung Persekutuan Dalam (GSPD)</h3>
+                    <div class="relative w-full max-w-md aspect-[4/3] bg-navy-900/60 rounded-xl border border-slate-700 p-2 flex items-center justify-center">
+                        <canvas id="canvasGSPD" class="w-full h-full"></canvas>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 glass-card p-5 rounded-2xl space-y-4">
+                    <h3 class="text-xl font-bold text-amber-400">Rumus GSPD</h3>
+                    <div class="p-4 bg-navy-900 rounded-xl text-center font-mono text-amber-300 text-lg border border-slate-700">
+                        d² = p² - (R + r)²
+                    </div>
+                    <ul class="text-xs text-slate-300 space-y-1.5">
+                        <li><strong>d</strong> = Panjang garis singgung persekutuan dalam</li>
+                        <li><strong>p</strong> = Jarak antara kedua titik pusat lingkaran</li>
+                        <li><strong>R</strong> = Jari-jari lingkaran besar</li>
+                        <li><strong>r</strong> = Jari-jari lingkaran kecil</li>
+                    </ul>
+
+                    <div class="p-3 bg-slate-800/80 rounded-xl border border-slate-700 text-xs text-slate-300">
+                        <strong class="text-white block mb-1">Contoh Kasus:</strong>
+                        Jika R = 6 cm, r = 4 cm, dan jarak p = 26 cm, maka:<br>
+                        d² = 26² - (6 + 4)² = 676 - 100 = 576<br>
+                        d = &radic;576 = <strong>24 cm</strong>.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. MENU SIMULASI INTERAKTIF / VIRTUAL LAB & KALKULATOR -->
+        <section id="page-lab" class="page-content hidden space-y-6">
+            <div class="border-b border-slate-700 pb-4">
+                <h2 class="text-3xl font-bold text-white flex items-center">
+                    <i class="fa-solid fa-flask text-cyan-400 mr-3"></i> Virtual Lab & Kalkulator Lingkaran
+                </h2>
+                <p class="text-slate-400 mt-1">Laboratorium matematika virtual untuk kalkulasi otomatis dan visualisasi eksperimen lingkaran.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Calculator Tools -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-card p-6 rounded-2xl space-y-4">
+                        <h3 class="text-lg font-bold text-cyan-400 flex items-center"><i class="fa-solid fa-calculator mr-2"></i> Kalkulator Serbaguna Lingkaran</h3>
+                        
+                        <div class="space-y-3 text-sm">
+                            <div>
+                                <label class="block text-slate-300 mb-1">Jari-Jari Lingkaran (r) cm:</label>
+                                <input type="number" id="calcR" value="7" class="w-full px-3 py-2 bg-navy-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-400" oninput="calculateAllLab()">
+                            </div>
+                            <div>
+                                <label class="block text-slate-300 mb-1">Sudut Pusat (&theta;) derajat:</label>
+                                <input type="number" id="calcAngle" value="90" class="w-full px-3 py-2 bg-navy-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-400" oninput="calculateAllLab()">
+                            </div>
+                        </div>
+
+                        <!-- Computed Real-time Display -->
+                        <div class="space-y-2 pt-2 text-xs border-t border-slate-700">
+                            <div class="flex justify-between p-2 bg-navy-900 rounded">
+                                <span class="text-slate-400">Diameter (d):</span>
+                                <span id="outCalcD" class="font-bold text-white font-mono">14 cm</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-navy-900 rounded">
+                                <span class="text-slate-400">Keliling Total (K):</span>
+                                <span id="outCalcK" class="font-bold text-cyan-400 font-mono">43.98 cm</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-navy-900 rounded">
+                                <span class="text-slate-400">Luas Total (L):</span>
+                                <span id="outCalcL" class="font-bold text-cyan-400 font-mono">153.94 cm²</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-navy-900 rounded">
+                                <span class="text-slate-400">Panjang Busur (s):</span>
+                                <span id="outCalcBusur" class="font-bold text-amber-400 font-mono">11.00 cm</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-navy-900 rounded">
+                                <span class="text-slate-400">Luas Juring:</span>
+                                <span id="outCalcJuring" class="font-bold text-amber-400 font-mono">38.48 cm²</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-navy-900 rounded">
+                                <span class="text-slate-400">Sudut Keliling (&psi;):</span>
+                                <span id="outCalcSudutKeliling" class="font-bold text-emerald-400 font-mono">45.00°</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Dynamic Rendering Canvas -->
+                <div class="lg:col-span-7 glass-card p-4 rounded-2xl flex flex-col items-center justify-center">
+                    <h3 class="text-sm font-semibold text-cyan-400 mb-2">Simulasi Grafis Geometri Live</h3>
+                    <div class="relative w-full max-w-md aspect-square bg-navy-900/60 rounded-xl border border-slate-700 p-2 flex items-center justify-center">
+                        <canvas id="canvasLab" class="w-full h-full"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. MENU CONTOH SOAL DAN PEMBAHASAN -->
+        <section id="page-contoh-soal" class="page-content hidden space-y-6">
+            <div class="border-b border-slate-700 pb-4">
+                <h2 class="text-3xl font-bold text-white flex items-center">
+                    <i class="fa-solid fa-lightbulb text-cyan-400 mr-3"></i> Contoh Soal & Pembahasan Terperinci
+                </h2>
+                <p class="text-slate-400 mt-1">Kumpulan 10 contoh soal terstruktur lengkap dengan langkah penyelesaian sistematis.</p>
+            </div>
+
+            <!-- List of 10 Contoh Soal -->
+            <div id="contohSoalContainer" class="space-y-4">
+                <!-- Javascript will populate 10 structured example questions here -->
+            </div>
+        </section>
+
+        <!-- 9. MENU GAME EDUKASI (PETUALANGAN LINGKARAN) -->
+        <section id="page-game" class="page-content hidden space-y-6">
+            <div class="border-b border-slate-700 pb-4 flex justify-between items-center flex-wrap gap-2">
+                <div>
+                    <h2 class="text-3xl font-bold text-amber-400 flex items-center">
+                        <i class="fa-solid fa-gamepad mr-3"></i> Game: Petualangan Lingkaran
+                    </h2>
+                    <p class="text-slate-400 mt-1">Kumpulkan bintang dan raih skor tertinggi dengan menjawab tantangan materi lingkaran!</p>
+                </div>
+                <div class="flex items-center space-x-4 bg-navy-800 px-4 py-2 rounded-xl border border-slate-700">
+                    <div class="text-center">
+                        <span class="text-xs text-slate-400 block">Skor Kamu</span>
+                        <strong id="gameScore" class="text-xl text-amber-400 font-mono">0</strong>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-xs text-slate-400 block">Bintang</span>
+                        <span id="gameStars" class="text-amber-400 text-sm"><i class="fa-solid fa-star"></i> 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Arena Box -->
+            <div id="gameArena" class="glass-card p-6 rounded-2xl max-w-2xl mx-auto space-y-6 border border-amber-500/30">
+                <div class="flex justify-between items-center text-xs text-slate-400 border-b border-slate-700 pb-2">
+                    <span id="gameLevel">Tantangan Level 1 / 5</span>
+                    <span id="gameCategory" class="text-cyan-400 font-semibold">Tebak Unsur</span>
+                </div>
+
+                <div class="text-center space-y-3 py-4">
+                    <h3 id="gameQuestionText" class="text-xl font-bold text-white">Pertanyaan game akan muncul di sini...</h3>
+                    <div id="gameVisualGraphic" class="flex justify-center my-2"></div>
+                </div>
+
+                <!-- Options -->
+                <div id="gameOptionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- Dynamic Answer Buttons -->
+                </div>
+
+                <!-- Reset / Next Control -->
+                <div id="gameFeedback" class="hidden p-3 rounded-xl text-center text-sm font-semibold"></div>
+                <div class="flex justify-end pt-2">
+                    <button id="btnNextGame" onclick="nextGameQuestion()" class="hidden px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold transition flex items-center">
+                        Soal Berikutnya <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. MENU LATIHAN SOAL (15 SOAL PILIHAN GANDA) -->
+        <section id="page-latihan" class="page-content hidden space-y-6">
+            <div class="border-b border-slate-700 pb-4">
+                <h2 class="text-3xl font-bold text-white flex items-center">
+                    <i class="fa-solid fa-pen-to-square text-cyan-400 mr-3"></i> Latihan Soal Interaktif (15 Soal)
+                </h2>
+                <p class="text-slate-400 mt-1">Uji pemahaman Anda per soal dengan umpan balik langsung dan penjelasan lengkap.</p>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl max-w-3xl mx-auto space-y-6">
+                <!-- Progress Header -->
+                <div class="flex justify-between items-center border-b border-slate-700 pb-3 text-sm">
+                    <span class="text-slate-400">Soal Ke: <strong id="latNum" class="text-cyan-400">1</strong> dari 15</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full border border-slate-700">Pilihan Ganda</span>
+                </div>
+
+                <!-- Question Text -->
+                <h3 id="latQuestionText" class="text-lg font-medium text-white leading-relaxed">Loading latihan soal...</h3>
+
+                <!-- Choices (5 Options A-E) -->
+                <div id="latOptions" class="space-y-3">
+                    <!-- Rendered dynamically -->
+                </div>
+
+                <!-- Instant Feedback & Pembahasan Box -->
+                <div id="latFeedbackBox" class="hidden p-4 rounded-xl text-sm space-y-2"></div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between items-center pt-4 border-t border-slate-700">
+                    <button onclick="prevLatQuestion()" id="btnPrevLat" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-semibold transition disabled:opacity-50">
+                        <i class="fa-solid fa-chevron-left mr-1"></i> Sebelumnya
+                    </button>
+                    <button onclick="nextLatQuestion()" id="btnNextLat" class="px-5 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-semibold transition">
+                        Berikutnya <i class="fa-solid fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. MENU EVALUASI MANDIRI (20 SOAL) -->
+        <section id="page-evaluasi" class="page-content hidden space-y-6">
+            <div class="border-b border-slate-700 pb-4">
+                <h2 class="text-3xl font-bold text-emerald-400 flex items-center">
+                    <i class="fa-solid fa-graduation-cap mr-3"></i> Evaluasi Mandiri Akhir (20 Soal)
+                </h2>
+                <p class="text-slate-400 mt-1">Ujian komprehensif materi lingkaran. Selesaikan seluruh soal untuk melihat skor akhir dan kategori hasil belajar Anda.</p>
+            </div>
+
+            <!-- Start Card / Quiz Box Container -->
+            <div id="evalStartBox" class="glass-card p-8 rounded-2xl max-w-xl mx-auto text-center space-y-4">
+                <i class="fa-solid fa-clipboard-check text-6xl text-emerald-400 mb-2"></i>
+                <h3 class="text-2xl font-bold text-white">Siap Memulai Evaluasi?</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Evaluasi ini terdiri dari <strong>20 soal pilihan ganda</strong> yang mencakup seluruh konsep unsur, sudut, busur, juring, dan garis singgung lingkaran.
+                </p>
+                <button onclick="startEvaluasi()" class="px-8 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition shadow-lg shadow-emerald-600/30">
+                    MULAI EVALUASI SEKARANG
+                </button>
+            </div>
+
+            <!-- Active Quiz Form -->
+            <div id="evalQuizBox" class="hidden glass-card p-6 rounded-2xl max-w-3xl mx-auto space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-700 pb-3 text-sm">
+                    <span class="text-slate-400">Soal Evaluasi <strong id="evalCurrentIndex" class="text-emerald-400">1</strong> / 20</span>
+                    <span id="evalDiffBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-amber-400 border border-slate-700">Sedang</span>
+                </div>
+
+                <h3 id="evalQuestionText" class="text-lg font-medium text-white leading-relaxed">Text Soal Evaluasi...</h3>
+
+                <div id="evalOptions" class="space-y-3">
+                    <!-- Options -->
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-slate-700">
+                    <button onclick="prevEvalQuestion()" id="btnPrevEval" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-semibold transition">
+                        <i class="fa-solid fa-chevron-left mr-1"></i> Sebelumnya
+                    </button>
+                    <button onclick="nextEvalQuestion()" id="btnNextEval" class="px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold transition">
+                        Berikutnya <i class="fa-solid fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Evaluasi Result Screen -->
+            <div id="evalResultBox" class="hidden glass-card p-8 rounded-2xl max-w-2xl mx-auto text-center space-y-6">
+                <h3 class="text-2xl font-bold text-white">Hasil Evaluasi Pembelajaran</h3>
+                
+                <div class="w-36 h-36 mx-auto rounded-full bg-gradient-to-tr from-emerald-600 to-teal-500 flex flex-col items-center justify-center shadow-xl border-4 border-slate-800">
+                    <span class="text-xs text-slate-200">SKOR AKHIR</span>
+                    <span id="evalScoreValue" class="text-4xl font-extrabold text-white">0</span>
+                    <span class="text-xs text-slate-200">/ 100</span>
+                </div>
+
+                <div class="space-y-1">
+                    <span class="text-xs text-slate-400 uppercase tracking-widest block">Kategori Hasil Belajar</span>
+                    <h4 id="evalCategoryValue" class="text-xl font-bold text-emerald-400">Sangat Baik</h4>
+                </div>
+
+                <p id="evalFeedbackText" class="text-sm text-slate-300 italic">Selamat! Anda telah menguasai materi lingkaran dengan sangat baik.</p>
+
+                <div class="flex justify-center gap-4 pt-4">
+                    <button onclick="startEvaluasi()" class="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold transition">
+                        <i class="fa-solid fa-rotate-left mr-2"></i> Ulangi Evaluasi
+                    </button>
+                    <button onclick="showEvalReview()" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition">
+                        <i class="fa-solid fa-file-lines mr-2"></i> Lihat Pembahasan
+                    </button>
+                </div>
+            </div>
+
+            <!-- Evaluasi Pembahasan List Container -->
+            <div id="evalReviewContainer" class="hidden space-y-4 max-w-3xl mx-auto">
+                <!-- Rendered dynamically -->
+            </div>
+        </section>
+
+        <!-- 12. MENU REFLEKSI -->
+        <section id="page-refleksi" class="page-content hidden space-y-6">
+            <div class="border-b border-slate-700 pb-4">
+                <h2 class="text-3xl font-bold text-white flex items-center">
+                    <i class="fa-solid fa-comment-dots text-cyan-400 mr-3"></i> Refleksi Pembelajaran Peserta Didik
+                </h2>
+                <p class="text-slate-400 mt-1">Renungkan pengalaman belajar Anda setelah mempelajari materi lingkaran.</p>
+            </div>
+
+            <form id="formRefleksi" onsubmit="submitRefleksi(event)" class="glass-card p-6 rounded-2xl max-w-3xl mx-auto space-y-5">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-200 mb-2">1. Apa saja hal baru yang paling berkesan telah Anda pelajari tentang lingkaran?</label>
+                    <textarea required rows="3" class="w-full p-3 bg-navy-900 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-400" placeholder="Tuliskan jawaban Anda di sini..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-200 mb-2">2. Unsur lingkaran mana yang menurut Anda paling mudah dipahami?</label>
+                    <select required class="w-full p-3 bg-navy-900 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-400">
+                        <option value="">-- Pilih Unsur --</option>
+                        <option value="Titik Pusat & Jari-jari">Titik Pusat & Jari-jari</option>
+                        <option value="Diameter & Busur">Diameter & Busur</option>
+                        <option value="Sudut Pusat & Keliling">Sudut Pusat & Keliling</option>
+                        <option value="Juring & Tembereng">Juring & Tembereng</option>
+                        <option value="Garis Singgung">Garis Singgung Lingkaran</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-200 mb-2">3. Bagian atau rumus materi lingkaran mana yang masih terasa menantang/sulit?</label>
+                    <textarea required rows="3" class="w-full p-3 bg-navy-900 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-400" placeholder="Tuliskan materi yang sulit Anda pahami..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-200 mb-2">4. Sebutkan contoh penerapan konsep lingkaran yang Anda temui dalam kehidupan sehari-hari!</label>
+                    <textarea required rows="3" class="w-full p-3 bg-navy-900 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-400" placeholder="Contoh: Roda sepeda, jam dinding, bianglala..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold transition shadow-lg shadow-cyan-500/25">
+                    KIRIM HASIL REFLEKSI
+                </button>
+            </form>
+
+            <div id="refleksiSubmittedMsg" class="hidden glass-card p-6 rounded-2xl max-w-xl mx-auto text-center space-y-3">
+                <i class="fa-solid fa-circle-check text-5xl text-emerald-400"></i>
+                <h3 class="text-xl font-bold text-white">Refleksi Berhasil Terkirim!</h3>
+                <p class="text-sm text-slate-300">Terima kasih telah mengisi refleksi pembelajaran Ibu Mariam Hayoto, S.Pd. Tetap semangat belajar matematika!</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy-800/90 border-t border-slate-700/50 py-4 text-center text-xs text-slate-400 mt-8">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p>&copy; 2026 Matematika Interaktif - SMAN 46 Maluku Tengah. Mariam Hayoto, S.Pd.</p>
+            <div class="flex space-x-4">
+                <span class="text-cyan-400"><i class="fa-solid fa-graduation-cap mr-1"></i> Kelas XI A & XI B</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL PETUNJUK PENGGUNAAN -->
+    <div id="modal-petunjuk" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
+        <div class="glass-card bg-navy-800 p-6 rounded-2xl max-w-lg w-full space-y-4 border border-slate-700">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+                <h3 class="text-xl font-bold text-cyan-400 flex items-center"><i class="fa-solid fa-circle-info mr-2"></i> Petunjuk Penggunaan Aplikasi</h3>
+                <button onclick="closeModal('modal-petunjuk')" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="text-sm text-slate-300 space-y-2 max-h-96 overflow-y-auto pr-2">
+                <p><strong>1. Navigasi Bar:</strong> Gunakan menu di bagian atas laptop atau ikon burger di smartphone untuk berpindah antar materi dan fitur.</p>
+                <p><strong>2. Diagram Interaktif:</strong> Pada menu <em>Unsur Lingkaran</em>, <em>Sudut Pusat & Keliling</em>, dan <em>Virtual Lab</em>, Anda dapat mengeklik atau menggeser elemen visual pada canvas secara langsung.</p>
+                <p><strong>3. Slider Interaktif:</strong> Ubah nilai jari-jari dan sudut untuk melihat perubahan ukuran busur dan juring secara real-time.</p>
+                <p><strong>4. Game & Evaluasi:</strong> Uji pengetahuan Anda melalui tantangan Game Petualangan Lingkaran dan Kuis Evaluasi 20 Soal otomatis.</p>
+            </div>
+            <div class="text-right pt-2">
+                <button onclick="closeModal('modal-petunjuk')" class="px-5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-sm transition">Saya Mengerti</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN JAVASCRIPT APP LOGIC -->
+    <script>
+        // --- DATA & STATE MANAGEMENT ---
+        const UNSUR_DATA = {
+            pusat: {
+                title: 'Titik Pusat (O)',
+                desc: 'Titik yang berada tepat di tengah-tengah lingkaran. Jarak dari titik pusat ke semua titik pada lengkung lingkaran adalah sama.',
+                formula: 'Simbol: O (Origin)'
+            },
+            jari: {
+                title: 'Jari-Jari (r)',
+                desc: 'Garis yang menghubungkan titik pusat lingkaran dengan satu titik pada lengkung lingkaran. Jari-jari disimbolkan dengan r (radius).',
+                formula: 'r = ½ &times; d'
+            },
+            diameter: {
+                title: 'Diameter (d)',
+                desc: 'Garis lurus yang menghubungkan dua titik pada keliling lingkaran dan melewati titik pusat. Panjang diameter adalah dua kali panjang jari-jari.',
+                formula: 'd = 2 &times; r'
+            },
+            busur: {
+                title: 'Busur Lingkaran',
+                desc: 'Garis lengkung yang merupakan bagian dari keliling lingkaran. Terbagi menjadi busur kecil (<180°) dan busur besar (>180°).',
+                formula: 's = (&theta;/360°) &times; 2&pi;r'
+            },
+            talibusur: {
+                title: 'Tali Busur',
+                desc: 'Garis lurus yang menghubungkan dua titik pada keliling lingkaran tanpa harus melalui titik pusat lingkaran.',
+                formula: 'Tali busur terpanjang = Diameter'
+            },
+            juring: {
+                title: 'Juring Lingkaran',
+                desc: 'Daerah di dalam lingkaran yang dibatasi oleh dua buah jari-jari dan satu busur lingkaran yang diapit oleh kedua jari-jari tersebut.',
+                formula: 'L_juring = (&theta;/360°) &times; &pi;r²'
+            },
+            tembereng: {
+                title: 'Tembereng Lingkaran',
+                desc: 'Daerah di dalam lingkaran yang dibatasi oleh sebuah tali busur dan busur lingkarannya.',
+                formula: 'L_tembereng = L_juring - L_segitiga'
+            },
+            apotema: {
+                title: 'Apotema',
+                desc: 'Garis tegak lurus yang menghubungkan titik pusat lingkaran dengan tali busur lingkaran.',
+                formula: 'Apotema &bot; Tali Busur'
+            },
+            garissinggung: {
+                title: 'Garis Singgung Lingkaran',
+                desc: 'Garis yang memotong lingkaran tepat di satu titik dan selalu tegak lurus (90°) terhadap jari-jari yang melalui titik singgung tersebut.',
+                formula: 'Garis Singgung &bot; Jari-jari'
+            }
+        };
+
+        const CONTOH_SOAL_DATA = [
+            {
+                no: 1,
+                tingkat: 'Mudah',
+                soal: 'Sebuah lingkaran memiliki jari-jari (r) sebesar 14 cm. Hitunglah keliling dan luas lingkaran tersebut! (&pi; = 22/7)',
+                diketahui: 'r = 14 cm, &pi; = 22/7',
+                ditanya: 'Keliling (K) dan Luas (L) lingkaran',
+                rumus: 'K = 2 &times; &pi; &times; r  |  L = &pi; &times; r²',
+                langkah: '1. K = 2 &times; (22/7) &times; 14 = 2 &times; 22 &times; 2 = 88 cm\n2. L = (22/7) &times; 14 &times; 14 = 22 &times; 2 &times; 14 = 616 cm²',
+                jawaban: 'Keliling = 88 cm, Luas = 616 cm²'
+            },
+            {
+                no: 2,
+                tingkat: 'Mudah',
+                soal: 'Diketahui sudut pusat &theta; = 60° pada lingkaran berjari-jari 21 cm. Berapakah panjang busur di hadapan sudut pusat tersebut?',
+                diketahui: '&theta; = 60°, r = 21 cm, &pi; = 22/7',
+                ditanya: 'Panjang busur (s)',
+                rumus: 's = (&theta; / 360°) &times; 2 &times; &pi; &times; r',
+                langkah: 's = (60° / 360°) &times; 2 &times; (22/7) &times; 21 = (1/6) &times; 2 &times; 22 &times; 3 = (1/6) &times; 132 = 22 cm',
+                jawaban: 'Panjang busur = 22 cm'
+            },
+            {
+                no: 3,
+                tingkat: 'Sedang',
+                soal: 'Suatu juring lingkaran memiliki sudut pusat 90° dan jari-jari 10 cm. Hitunglah luas juring tersebut! (&pi; = 3,14)',
+                diketahui: '&theta; = 90°, r = 10 cm, &pi; = 3,14',
+                ditanya: 'Luas Juring (L)',
+                rumus: 'L = (&theta; / 360°) &times; &pi; &times; r²',
+                langkah: 'L = (90° / 360°) &times; 3,14 &times; 10 &times; 10 = (1/4) &times; 314 = 78,5 cm²',
+                jawaban: 'Luas juring = 78,5 cm²'
+            },
+            {
+                no: 4,
+                tingkat: 'Sedang',
+                soal: 'Jika besar sudut keliling ABC yang menghadap busur AC adalah 40°, berapakah besar sudut pusat AOC?',
+                diketahui: 'Sudut keliling (&psi;) = 40°',
+                ditanya: 'Sudut pusat (&theta;) AOC',
+                rumus: 'Sudut Pusat = 2 &times; Sudut Keliling',
+                langkah: 'Sudut AOC = 2 &times; 40° = 80°',
+                jawaban: 'Sudut pusat AOC = 80°'
+            },
+            {
+                no: 5,
+                tingkat: 'Sedang',
+                soal: 'Dua buah lingkaran masing-masing berjari-jari R = 8 cm dan r = 3 cm. Jarak antara kedua pusat lingkaran adalah p = 13 cm. Hitung panjang garis singgung persekutuan luar (GSPL)!',
+                diketahui: 'R = 8 cm, r = 3 cm, p = 13 cm',
+                ditanya: 'Panjang GSPL (d)',
+                rumus: 'd² = p² - (R - r)²',
+                langkah: 'd² = 13² - (8 - 3)² = 169 - 5² = 169 - 25 = 144. d = &radic;144 = 12 cm',
+                jawaban: 'Panjang GSPL = 12 cm'
+            },
+            {
+                no: 6,
+                tingkat: 'Sedang',
+                soal: 'Dua buah lingkaran berjari-jari R = 6 cm dan r = 4 cm dengan jarak antar pusat p = 26 cm. Hitung panjang garis singgung persekutuan dalam (GSPD)!',
+                diketahui: 'R = 6 cm, r = 4 cm, p = 26 cm',
+                ditanya: 'Panjang GSPD (d)',
+                rumus: 'd² = p² - (R + r)²',
+                langkah: 'd² = 26² - (6 + 4)² = 676 - 10² = 676 - 100 = 576. d = &radic;576 = 24 cm',
+                jawaban: 'Panjang GSPD = 24 cm'
+            },
+            {
+                no: 7,
+                tingkat: 'Sulit',
+                soal: 'Sebuah juring lingkaran memiliki luas 154 cm² dengan jari-jari 14 cm. Berapakah besar sudut pusat juring tersebut? (&pi; = 22/7)',
+                diketahui: 'Luas Juring = 154 cm², r = 14 cm',
+                ditanya: 'Sudut Pusat (&theta;)',
+                rumus: '&theta; = (Luas Juring &times; 360°) / (&pi; &times; r²)',
+                langkah: '1. Luas Total Lingkaran = (22/7) &times; 14 &times; 14 = 616 cm².\n2. &theta; = (154 / 616) &times; 360° = (1/4) &times; 360° = 90°',
+                jawaban: 'Sudut pusat &theta; = 90°'
+            },
+            {
+                no: 8,
+                tingkat: 'Sulit',
+                soal: 'Sebuah taman berbentuk lingkaran dengan diameter 28 meter akan dipasangi lampu taman di sekelilingnya dengan jarak antar lampu 4 meter. Berapa jumlah lampu yang dibutuhkan?',
+                diketahui: 'Diameter (d) = 28 m, r = 14 m, Jarak lampu = 4 m',
+                ditanya: 'Banyaknya lampu',
+                rumus: 'Keliling (K) = &pi; &times; d',
+                langkah: '1. K = (22/7) &times; 28 = 88 m.\n2. Jumlah lampu = 88 / 4 = 22 buah lampu.',
+                jawaban: 'Dibutuhkan 22 buah lampu'
+            },
+            {
+                no: 9,
+                tingkat: 'Sulit',
+                soal: 'Pada segi empat tali busur ABCD di dalam lingkaran, diketahui &ang;A = (2x + 10)° dan &ang;C = (3x + 20)°. Tentukan nilai x dan besar &ang;A!',
+                diketahui: '&ang;A + &ang;C = 180° (Segi empat tali busur berhadapan)',
+                ditanya: 'Nilai x dan besar &ang;A',
+                rumus: '&ang;A + &ang;C = 180°',
+                langkah: '1. (2x + 10) + (3x + 20) = 180 => 5x + 30 = 180 => 5x = 150 => x = 30°.\n2. &ang;A = 2(30) + 10 = 70°.',
+                jawaban: 'x = 30° dan &ang;A = 70°'
+            },
+            {
+                no: 10,
+                tingkat: 'Sulit',
+                soal: 'Sebuah rantai menghubungkan dua roda gigi sepeda berdiameter R = 15 cm dan r = 5 cm. Jarak kedua pusat roda p = 26 cm. Hitung panjang garis singgung persekutuan luar kedua roda tersebut!',
+                diketahui: 'R = 15 cm, r = 5 cm, p = 26 cm',
+                ditanya: 'GSPL (d)',
+                rumus: 'd = &radic;[p² - (R - r)²]',
+                langkah: 'd = &radic;[26² - (15 - 5)²] = &radic;[676 - 100] = &radic;576 = 24 cm.',
+                jawaban: 'Panjang rantai garis singgung = 24 cm'
+            }
+        ];
+
+        const LATIHAN_SOAL_DATA = [
+            {
+                q: "1. Garis lurus yang menghubungkan titik pusat dengan titik pada keliling lingkaran disebut...",
+                options: ["A. Diameter", "B. Tali Busur", "C. Jari-jari", "D. Apotema", "E. Busur"],
+                answer: 2,
+                exp: "Jari-jari adalah garis lurus yang menghubungkan titik pusat lingkaran ke keliling lingkaran."
+            },
+            {
+                q: "2. Jika diameter lingkaran adalah 28 cm, maka panjang jari-jarinya adalah...",
+                options: ["A. 56 cm", "B. 14 cm", "C. 7 cm", "D. 21 cm", "E. 28 cm"],
+                answer: 1,
+                exp: "Jari-jari r = d / 2 = 28 / 2 = 14 cm."
+            },
+            {
+                q: "3. Sudut pusat suatu lingkaran adalah 120°. Jika sudut keliling menghadap busur yang sama, maka besar sudut keliling tersebut adalah...",
+                options: ["A. 240°", "B. 120°", "C. 60°", "D. 90°", "E. 30°"],
+                answer: 2,
+                exp: "Sudut Keliling = ½ × Sudut Pusat = ½ × 120° = 60°."
+            },
+            {
+                q: "4. Daerah yang dibatasi oleh sebuah tali busur dan busur lingkaran dinamakan...",
+                options: ["A. Juring", "B. Tembereng", "C. Apotema", "D. Busur", "E. Segitiga"],
+                answer: 1,
+                exp: "Tembereng adalah daerah yang dibatasi oleh tali busur dan lengkung busur."
+            },
+            {
+                q: "5. Hitunglah panjang busur lingkaran dengan sudut pusat 90° dan jari-jari 7 cm (&pi; = 22/7)!",
+                options: ["A. 11 cm", "B. 22 cm", "C. 44 cm", "D. 15.5 cm", "E. 7 cm"],
+                answer: 0,
+                exp: "s = (90/360) × 2 × (22/7) × 7 = (1/4) × 44 = 11 cm."
+            },
+            {
+                q: "6. Sebuah juring memiliki sudut pusat 60° dan jari-jari 14 cm. Luas juring tersebut adalah... (&pi; = 22/7)",
+                options: ["A. 102.67 cm²", "B. 616 cm²", "C. 308 cm²", "D. 154 cm²", "E. 51.33 cm²"],
+                answer: 0,
+                exp: "L = (60/360) × (22/7) × 14 × 14 = (1/6) × 616 = 102.67 cm²."
+            },
+            {
+                q: "7. Sudut keliling yang menghadap diameter lingkaran selalu besarnya...",
+                options: ["A. 45°", "B. 60°", "C. 90°", "D. 180°", "E. 360°"],
+                answer: 2,
+                exp: "Sudut keliling yang menghadap diameter selalu 90° (siku-siku)."
+            },
+            {
+                q: "8. Garis singgung lingkaran selalu membentuk sudut ... terhadap jari-jari yang melalui titik singgung.",
+                options: ["A. 45°", "B. 90°", "C. 60°", "D. 180°", "E. 0°"],
+                answer: 1,
+                exp: "Garis singgung tegak lurus (90°) terhadap jari-jari titik singgung."
+            },
+            {
+                q: "9. Jarak pusat dua lingkaran p = 25 cm, jari-jari R = 13 cm dan r = 6 cm. Panjang GSPL adalah...",
+                options: ["A. 24 cm", "B. 20 cm", "C. 15 cm", "D. 25 cm", "E. 18 cm"],
+                answer: 0,
+                exp: "d² = 25² - (13 - 6)² = 625 - 49 = 576 => d = 24 cm."
+            },
+            {
+                q: "10. Jarak pusat dua lingkaran p = 17 cm, jari-jari R = 5 cm dan r = 3 cm. Panjang GSPD adalah...",
+                options: ["A. 12 cm", "B. 15 cm", "C. 8 cm", "D. 10 cm", "E. 16 cm"],
+                answer: 1,
+                exp: "d² = 17² - (5 + 3)² = 289 - 64 = 225 => d = 15 cm."
+            },
+            {
+                q: "11. Keliling lingkaran yang berdiameter 14 cm adalah...",
+                options: ["A. 88 cm", "B. 44 cm", "C. 22 cm", "D. 154 cm", "E. 616 cm"],
+                answer: 1,
+                exp: "K = &pi; × d = (22/7) × 14 = 44 cm."
+            },
+            {
+                q: "12. Pada segi empat tali busur, jumlah sudut yang saling berhadapan adalah...",
+                options: ["A. 90°", "B. 180°", "C. 360°", "D. 270°", "E. 120°"],
+                answer: 1,
+                exp: "Jumlah sudut-sudut berhadapan pada segi empat tali busur adalah 180°."
+            },
+            {
+                q: "13. Garis tegak lurus yang menghubungkan titik pusat dengan tali busur dinamakan...",
+                options: ["A. Jari-jari", "B. Busur", "C. Apotema", "D. Tembereng", "E. Diameter"],
+                answer: 2,
+                exp: "Apotema adalah jarak tegak lurus dari pusat ke tali busur."
+            },
+            {
+                q: "14. Jika luas lingkaran adalah 154 cm², maka jari-jari lingkaran tersebut adalah... (&pi; = 22/7)",
+                options: ["A. 14 cm", "B. 21 cm", "C. 7 cm", "D. 28 cm", "E. 3.5 cm"],
+                answer: 2,
+                exp: "L = &pi;r² => 154 = (22/7)r² => r² = 49 => r = 7 cm."
+            },
+            {
+                q: "15. Roda kendaraan berjari-jari 35 cm berputar sebanyak 100 kali. Jarak yang ditempuh kendaraan adalah...",
+                options: ["A. 220 meter", "B. 440 meter", "C. 110 meter", "D. 22 meter", "E. 44 meter"],
+                answer: 0,
+                exp: "K = 2 × (22/7) × 35 = 220 cm. Jarak = 220 × 100 = 22.000 cm = 220 meter."
+            }
+        ];
+
+        // --- APP INITIALIZATION ---
+        window.onload = function() {
+            renderContohSoal();
+            initUnsurCanvas();
+            initSudutCanvas();
+            updateBusurJuringSim();
+            initGSPLCanvas();
+            initGSPDCanvas();
+            calculateAllLab();
+            initGame();
+            loadLatQuestion();
+        };
+
+        // --- PAGE NAVIGATION ---
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            // Close mobile menu if open
+            document.getElementById('mobileMenu').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // --- MENU 3: UNSUR LINGKARAN CANVAS ---
+        let currentUnsur = 'pusat';
+        function selectUnsur(key) {
+            currentUnsur = key;
+            const data = UNSUR_DATA[key];
+            if (!data) return;
+
+            document.getElementById('unsurTitle').innerText = data.title;
+            document.getElementById('unsurDesc').innerText = data.desc;
+            
+            const formulaBox = document.getElementById('unsurFormula');
+            formulaBox.classList.remove('hidden');
+            formulaBox.innerHTML = data.formula;
+
+            drawUnsurCanvas();
+        }
+
+        function initUnsurCanvas() {
+            selectUnsur('pusat');
+        }
+
+        function drawUnsurCanvas() {
+            const canvas = document.getElementById('canvasUnsur');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = 320;
+            const h = canvas.height = 320;
+            const cx = w / 2;
+            const cy = h / 2;
+            const r = 100;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Base Circle
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.strokeStyle = '#475569';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Highlight Elements based on currentUnsur
+            switch (currentUnsur) {
+                case 'pusat':
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+                    ctx.fillStyle = '#38bdf8';
+                    ctx.fill();
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = '14px sans-serif';
+                    ctx.fillText('O (Pusat)', cx + 10, cy - 10);
+                    break;
+                case 'jari':
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.lineTo(cx + r, cy);
+                    ctx.strokeStyle = '#38bdf8';
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+                    ctx.fillStyle = '#38bdf8';
+                    ctx.fillText('r (Jari-jari)', cx + 40, cy - 10);
+                    break;
+                case 'diameter':
+                    ctx.beginPath();
+                    ctx.moveTo(cx - r, cy);
+                    ctx.lineTo(cx + r, cy);
+                    ctx.strokeStyle = '#f59e0b';
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+                    ctx.fillStyle = '#f59e0b';
+                    ctx.fillText('d (Diameter)', cx - 30, cy - 10);
+                    break;
+                case 'busur':
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, r, -Math.PI / 4, Math.PI / 2);
+                    ctx.strokeStyle = '#10b981';
+                    ctx.lineWidth = 6;
+                    ctx.stroke();
+                    ctx.fillStyle = '#10b981';
+                    ctx.fillText('Busur AB', cx + r + 5, cy);
+                    break;
+                case 'talibusur':
+                    const ax = cx + r * Math.cos(-Math.PI / 3);
+                    const ay = cy + r * Math.sin(-Math.PI / 3);
+                    const bx = cx + r * Math.cos(Math.PI / 3);
+                    const by = cy + r * Math.sin(Math.PI / 3);
+                    ctx.beginPath();
+                    ctx.moveTo(ax, ay);
+                    ctx.lineTo(bx, by);
+                    ctx.strokeStyle = '#ec4899';
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+                    ctx.fillStyle = '#ec4899';
+                    ctx.fillText('Tali Busur', (ax + bx) / 2 + 10, (ay + by) / 2);
+                    break;
+                case 'juring':
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.arc(cx, cy, r, 0, Math.PI / 3);
+                    ctx.closePath();
+                    ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+                    ctx.fill();
+                    ctx.strokeStyle = '#38bdf8';
+                    ctx.stroke();
+                    ctx.fillStyle = '#38bdf8';
+                    ctx.fillText('Juring', cx + 30, cy + 25);
+                    break;
+                case 'tembereng':
+                    const tx1 = cx + r * Math.cos(-Math.PI / 4);
+                    const ty1 = cy + r * Math.sin(-Math.PI / 4);
+                    const tx2 = cx + r * Math.cos(Math.PI / 4);
+                    const ty2 = cy + r * Math.sin(Math.PI / 4);
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, r, -Math.PI / 4, Math.PI / 4);
+                    ctx.lineTo(tx1, ty1);
+                    ctx.fillStyle = 'rgba(245, 158, 11, 0.4)';
+                    ctx.fill();
+                    ctx.strokeStyle = '#f59e0b';
+                    ctx.stroke();
+                    ctx.fillStyle = '#f59e0b';
+                    ctx.fillText('Tembereng', cx + 60, cy + 5);
+                    break;
+                case 'apotema':
+                    // Draw Chord first
+                    const kx1 = cx + r * Math.cos(-Math.PI / 3);
+                    const ky1 = cy + r * Math.sin(-Math.PI / 3);
+                    const kx2 = cx + r * Math.cos(Math.PI / 3);
+                    const ky2 = cy + r * Math.sin(Math.PI / 3);
+                    ctx.beginPath();
+                    ctx.moveTo(kx1, ky1);
+                    ctx.lineTo(kx2, ky2);
+                    ctx.strokeStyle = '#94a3b8';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    // Apotema line
+                    const mx = (kx1 + kx2) / 2;
+                    const my = (ky1 + ky2) / 2;
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.lineTo(mx, my);
+                    ctx.strokeStyle = '#a855f7';
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+                    ctx.fillStyle = '#a855f7';
+                    ctx.fillText('Apotema', cx + 5, cy + 20);
+                    break;
+                case 'garissinggung':
+                    const px = cx + r;
+                    const py = cy;
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.lineTo(px, py);
+                    ctx.strokeStyle = '#94a3b8';
+                    ctx.stroke();
+                    // Tangent Line
+                    ctx.beginPath();
+                    ctx.moveTo(px, py - 80);
+                    ctx.lineTo(px, py + 80);
+                    ctx.strokeStyle = '#ef4444';
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+                    ctx.fillStyle = '#ef4444';
+                    ctx.fillText('Garis Singgung (90°)', px - 40, py - 85);
+                    break;
+            }
+
+            // Always draw Center Point O
+            ctx.beginPath();
+            ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+        }
+
+        // --- MENU 4: SUDUT PUSAT DAN SUDUT KELILING INTERAKTIF CANVAS ---
+        let angleA = 0; // Fixed A
+        let angleB = Math.PI / 3; // Movable B
+        let angleC = Math.PI * 1.2; // Movable C (Keliling)
+
+        function initSudutCanvas() {
+            const canvas = document.getElementById('canvasSudut');
+            if (!canvas) return;
+
+            function render() {
+                const ctx = canvas.getContext('2d');
+                const w = canvas.width = 320;
+                const h = canvas.height = 320;
+                const cx = w / 2;
+                const cy = h / 2;
+                const r = 100;
+
+                ctx.clearRect(0, 0, w, h);
+
+                // Circle
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                ctx.strokeStyle = '#475569';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Point Positions
+                const ax = cx + r * Math.cos(angleA);
+                const ay = cy + r * Math.sin(angleA);
+                const bx = cx + r * Math.cos(angleB);
+                const by = cy + r * Math.sin(angleB);
+                const cxPos = cx + r * Math.cos(angleC);
+                const cyPos = cy + r * Math.sin(angleC);
+
+                // Sudut Pusat (Cyan) AOC/AOB
+                ctx.beginPath();
+                ctx.moveTo(ax, ay);
+                ctx.lineTo(cx, cy);
+                ctx.lineTo(bx, by);
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // Sudut Keliling (Amber) ACB
+                ctx.beginPath();
+                ctx.moveTo(ax, ay);
+                ctx.lineTo(cxPos, cyPos);
+                ctx.lineTo(bx, by);
+                ctx.strokeStyle = '#f59e0b';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // Points circles
+                drawPoint(ctx, cx, cy, 'O', '#ffffff');
+                drawPoint(ctx, ax, ay, 'A', '#38bdf8');
+                drawPoint(ctx, bx, by, 'B', '#38bdf8');
+                drawPoint(ctx, cxPos, cyPos, 'C', '#f59e0b');
+
+                // Compute angles
+                let pAngle = Math.abs(angleB - angleA) * (180 / Math.PI);
+                if (pAngle > 180) pAngle = 360 - pAngle;
+                let kAngle = pAngle / 2;
+
+                document.getElementById('valSudutPusat').innerText = pAngle.toFixed(1) + '°';
+                document.getElementById('valSudutKeliling').innerText = kAngle.toFixed(1) + '°';
+            }
+
+            function drawPoint(ctx, x, y, label, color) {
+                ctx.beginPath();
+                ctx.arc(x, y, 6, 0, Math.PI * 2);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 12px sans-serif';
+                ctx.fillText(label, x + 8, y + 4);
+            }
+
+            render();
+
+            // Interactivity: Drag Point B or C
+            let isDragging = false;
+            let targetPoint = null;
+
+            canvas.onmousedown = canvas.ontouchstart = function(e) {
+                isDragging = true;
+                targetPoint = 'B'; // default toggle
+            };
+
+            canvas.onmousemove = canvas.ontouchmove = function(e) {
+                if (!isDragging) return;
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                const mx = clientX - rect.left - 160;
+                const my = clientY - rect.top - 160;
+                let angle = Math.atan2(my, mx);
+
+                if (targetPoint === 'B') {
+                    angleB = angle;
+                }
+                render();
+            };
+
+            canvas.onmouseup = canvas.ontouchend = function() {
+                isDragging = false;
+            };
+        }
+
+        // --- MENU 5: BUSUR & JURING SIMULATOR ---
+        function updateBusurJuringSim() {
+            const r = parseFloat(document.getElementById('inputRadius').value);
+            const theta = parseFloat(document.getElementById('inputAngle').value);
+
+            document.getElementById('lblRadius').innerText = r + ' cm';
+            document.getElementById('lblAngle').innerText = theta + '°';
+
+            // Formula calculation
+            const busur = (theta / 360) * 2 * Math.PI * r;
+            const juring = (theta / 360) * Math.PI * (r * r);
+
+            document.getElementById('resBusur').innerText = busur.toFixed(2) + ' cm';
+            document.getElementById('resJuring').innerText = juring.toFixed(2) + ' cm²';
+
+            // Render Canvas
+            const canvas = document.getElementById('canvasBusurJuring');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = 280;
+            const h = canvas.height = 280;
+            const cx = w / 2;
+            const cy = h / 2;
+            const rad = 90;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Full Circle
+            ctx.beginPath();
+            ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Sector Juring
+            const startRad = 0;
+            const endRad = (theta * Math.PI) / 180;
+
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.arc(cx, cy, rad, startRad, endRad);
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(245, 158, 11, 0.4)';
+            ctx.fill();
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Highlight Arc (Busur)
+            ctx.beginPath();
+            ctx.arc(cx, cy, rad, startRad, endRad);
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 5;
+            ctx.stroke();
+        }
+
+        // --- MENU 6: GARIS SINGGUNG TABS & CANVAS ---
+        function switchGarisTab(type) {
+            if (type === 'persekutuan-luar') {
+                document.getElementById('content-gspl').classList.remove('hidden');
+                document.getElementById('content-gspd').classList.add('hidden');
+                document.getElementById('tab-luar').className = 'px-4 py-2 rounded-lg text-sm font-semibold bg-cyan-600 text-white transition';
+                document.getElementById('tab-dalam').className = 'px-4 py-2 rounded-lg text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+            } else {
+                document.getElementById('content-gspl').classList.add('hidden');
+                document.getElementById('content-gspd').classList.remove('hidden');
+                document.getElementById('tab-dalam').className = 'px-4 py-2 rounded-lg text-sm font-semibold bg-amber-600 text-white transition';
+                document.getElementById('tab-luar').className = 'px-4 py-2 rounded-lg text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition';
+            }
+        }
+
+        function initGSPLCanvas() {
+            const canvas = document.getElementById('canvasGSPL');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = 360;
+            const h = canvas.height = 240;
+
+            ctx.clearRect(0, 0, w, h);
+
+            const c1x = 70, c1y = 120, R = 50;
+            const c2x = 270, c2y = 120, r = 25;
+
+            // Center Line p
+            ctx.beginPath();
+            ctx.moveTo(c1x, c1y);
+            ctx.lineTo(c2x, c2y);
+            ctx.strokeStyle = '#64748b';
+            ctx.setLineDash([4, 4]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Circle 1
+            ctx.beginPath();
+            ctx.arc(c1x, c1y, R, 0, Math.PI * 2);
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Circle 2
+            ctx.beginPath();
+            ctx.arc(c2x, c2y, r, 0, Math.PI * 2);
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // GSPL Line (Top Outer)
+            const tangentY1 = c1y - R;
+            const tangentY2 = c2y - r;
+            ctx.beginPath();
+            ctx.moveTo(c1x, tangentY1);
+            ctx.lineTo(c2x, tangentY2);
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+
+            // Points
+            drawDot(ctx, c1x, c1y, 'P1');
+            drawDot(ctx, c2x, c2y, 'P2');
+            drawDot(ctx, c1x, tangentY1, 'A');
+            drawDot(ctx, c2x, tangentY2, 'B');
+
+            function drawDot(ctx, x, y, label) {
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fillStyle = '#ffffff';
+                ctx.fill();
+                ctx.font = '10px sans-serif';
+                ctx.fillText(label, x - 5, y - 8);
+            }
+        }
+
+        function initGSPDCanvas() {
+            const canvas = document.getElementById('canvasGSPD');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = 360;
+            const h = canvas.height = 240;
+
+            ctx.clearRect(0, 0, w, h);
+
+            const c1x = 70, c1y = 120, R = 45;
+            const c2x = 270, c2y = 120, r = 30;
+
+            // Center Line p
+            ctx.beginPath();
+            ctx.moveTo(c1x, c1y);
+            ctx.lineTo(c2x, c2y);
+            ctx.strokeStyle = '#64748b';
+            ctx.setLineDash([4, 4]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Circle 1 & 2
+            ctx.beginPath(); ctx.arc(c1x, c1y, R, 0, Math.PI * 2); ctx.strokeStyle = '#f59e0b'; ctx.stroke();
+            ctx.beginPath(); ctx.arc(c2x, c2y, r, 0, Math.PI * 2); ctx.strokeStyle = '#f59e0b'; ctx.stroke();
+
+            // Internal Tangent Line
+            ctx.beginPath();
+            ctx.moveTo(c1x + 20, c1y - 40);
+            ctx.lineTo(c2x - 15, c2y + 26);
+            ctx.strokeStyle = '#ef4444';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+        }
+
+        // --- MENU 7: VIRTUAL LAB CALCULATOR ---
+        function calculateAllLab() {
+            const r = parseFloat(document.getElementById('calcR').value) || 0;
+            const theta = parseFloat(document.getElementById('calcAngle').value) || 0;
+
+            const d = 2 * r;
+            const K = 2 * Math.PI * r;
+            const L = Math.PI * r * r;
+            const busur = (theta / 360) * K;
+            const juring = (theta / 360) * L;
+            const sKeliling = theta / 2;
+
+            document.getElementById('outCalcD').innerText = d.toFixed(2) + ' cm';
+            document.getElementById('outCalcK').innerText = K.toFixed(2) + ' cm';
+            document.getElementById('outCalcL').innerText = L.toFixed(2) + ' cm²';
+            document.getElementById('outCalcBusur').innerText = busur.toFixed(2) + ' cm';
+            document.getElementById('outCalcJuring').innerText = juring.toFixed(2) + ' cm²';
+            document.getElementById('outCalcSudutKeliling').innerText = sKeliling.toFixed(2) + '°';
+
+            // Draw Lab Canvas
+            const canvas = document.getElementById('canvasLab');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width = 300;
+            const h = canvas.height = 300;
+            const cx = w / 2;
+            const cy = h / 2;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Dynamic radius representation
+            const displayR = Math.min(120, Math.max(20, r * 4));
+
+            ctx.beginPath();
+            ctx.arc(cx, cy, displayR, 0, Math.PI * 2);
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Juring Fill
+            const endRad = (theta * Math.PI) / 180;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.arc(cx, cy, displayR, 0, endRad);
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
+            ctx.fill();
+
+            // Center Dot
+            ctx.beginPath();
+            ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+        }
+
+        // --- MENU 8: RENDER CONTOH SOAL ---
+        function renderContohSoal() {
+            const container = document.getElementById('contohSoalContainer');
+            container.innerHTML = CONTOH_SOAL_DATA.map(item => `
+                <div class="glass-card p-5 rounded-2xl border-l-4 ${item.tingkat === 'Mudah' ? 'border-emerald-400' : item.tingkat === 'Sedang' ? 'border-amber-400' : 'border-rose-500'} space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold uppercase tracking-wider ${item.tingkat === 'Mudah' ? 'text-emerald-400' : item.tingkat === 'Sedang' ? 'text-amber-400' : 'text-rose-400'}">Contoh Soal ${item.no} (${item.tingkat})</span>
+                    </div>
+                    <h4 class="text-white font-semibold text-base">${item.soal}</h4>
+                    <div class="bg-navy-900/80 p-3 rounded-xl space-y-2 text-xs text-slate-300 font-mono border border-slate-700/60">
+                        <p><strong class="text-cyan-400">Diketahui:</strong> ${item.diketahui}</p>
+                        <p><strong class="text-amber-400">Ditanya:</strong> ${item.ditanya}</p>
+                        <p><strong class="text-purple-400">Rumus:</strong> ${item.rumus}</p>
+                        <p class="whitespace-pre-line"><strong class="text-emerald-400">Langkah Penyelesaian:</strong>\n${item.langkah}</p>
+                        <div class="pt-1 border-t border-slate-800 text-cyan-300 font-bold">
+                            Jawaban Akhir: ${item.jawaban}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- MENU 9: GAME EDUKASI ---
+        let gameScore = 0;
+        let gameStars = 0;
+        let gameIndex = 0;
+
+        const GAME_QUESTIONS = [
+            {
+                q: "Unsur manakah yang merupakan garis lurus penghubung titik pusat ke keliling?",
+                options: ["Tali Busur", "Jari-Jari", "Apotema", "Diameter"],
+                answer: 1,
+                cat: "Tebak Unsur"
+            },
+            {
+                q: "Jika sudut keliling = 35°, berapakah besar sudut pusat yang menghadap busur sama?",
+                options: ["70°", "35°", "17.5°", "140°"],
+                answer: 0,
+                cat: "Sudut Pusat"
+            },
+            {
+                q: "Rumus untuk menghitung panjang busur lingkaran adalah...",
+                options: ["(&theta;/360°) &times; &pi;r²", "(&theta;/360°) &times; 2&pi;r", "2 &times; &pi;r", "&pi;r²"],
+                answer: 1,
+                cat: "Panjang Busur"
+            },
+            {
+                q: "Sudut keliling yang menghadap diameter lingkaran besarnya...",
+                options: ["180°", "45°", "90°", "60°"],
+                answer: 2,
+                cat: "Sudut Keliling"
+            },
+            {
+                q: "Garis singgung lingkaran selalu membentuk sudut ___ terhadap jari-jari.",
+                options: ["90°", "45°", "180°", "0°"],
+                answer: 0,
+                cat: "Garis Singgung"
+            }
+        ];
+
+        function initGame() {
+            gameScore = 0;
+            gameStars = 0;
+            gameIndex = 0;
+            updateGameUI();
+            loadGameQuestion();
+        }
+
+        function updateGameUI() {
+            document.getElementById('gameScore').innerText = gameScore;
+            document.getElementById('gameStars').innerHTML = `<i class="fa-solid fa-star"></i> ${gameStars}`;
+        }
+
+        function loadGameQuestion() {
+            if (gameIndex >= GAME_QUESTIONS.length) {
+                // Game Completed
+                document.getElementById('gameQuestionText').innerText = " Selamat! Anda Menyelesaikan Petualangan Lingkaran!";
+                document.getElementById('gameOptionsContainer').innerHTML = '';
+                document.getElementById('gameFeedback').className = "p-4 bg-emerald-950/80 border border-emerald-500 rounded-xl text-center text-emerald-300 font-bold";
+                document.getElementById('gameFeedback').innerText = `Skor Akhir: ${gameScore} | Bintang Terkumpul: ${gameStars}`;
+                document.getElementById('gameFeedback').classList.remove('hidden');
+                document.getElementById('btnNextGame').classList.add('hidden');
+                return;
+            }
+
+            const current = GAME_QUESTIONS[gameIndex];
+            document.getElementById('gameLevel').innerText = `Tantangan Level ${gameIndex + 1} / ${GAME_QUESTIONS.length}`;
+            document.getElementById('gameCategory').innerText = current.cat;
+            document.getElementById('gameQuestionText').innerText = current.q;
+            document.getElementById('gameFeedback').classList.add('hidden');
+            document.getElementById('btnNextGame').classList.add('hidden');
+
+            const container = document.getElementById('gameOptionsContainer');
+            container.innerHTML = current.options.map((opt, idx) => `
+                <button onclick="checkGameAnswer(${idx})" class="p-3.5 rounded-xl bg-navy-900 border border-slate-700 hover:border-amber-400 hover:bg-slate-800 text-slate-200 text-sm font-semibold transition text-left flex items-center">
+                    <span class="w-6 h-6 rounded-full bg-slate-800 text-amber-400 text-xs flex items-center justify-center mr-3 font-bold">${String.fromCharCode(65+idx)}</span>
+                    ${opt}
+                </button>
+            `).join('');
+        }
+
+        function checkGameAnswer(selectedIndex) {
+            const current = GAME_QUESTIONS[gameIndex];
+            const feedback = document.getElementById('gameFeedback');
+            feedback.classList.remove('hidden');
+
+            if (selectedIndex === current.answer) {
+                gameScore += 20;
+                gameStars += 1;
+                updateGameUI();
+                feedback.className = "p-3 rounded-xl bg-emerald-950/80 border border-emerald-500 text-emerald-300 text-center font-bold text-sm animate-bounce";
+                feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Benar! +20 Poin & +1 Bintang!';
+            } else {
+                feedback.className = "p-3 rounded-xl bg-rose-950/80 border border-rose-500 text-rose-300 text-center font-bold text-sm";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1"></i> Kurang tepat. Jawaban benar: ${current.options[current.answer]}`;
+            }
+
+            // Disable option buttons
+            document.querySelectorAll('#gameOptionsContainer button').forEach(btn => btn.disabled = true);
+            document.getElementById('btnNextGame').classList.remove('hidden');
+        }
+
+        function nextGameQuestion() {
+            gameIndex++;
+            loadGameQuestion();
+        }
+
+        // --- MENU 10: LATIHAN SOAL (15 SOAL) ---
+        let latCurrentIndex = 0;
+        let latUserAnswers = new Array(LATIHAN_SOAL_DATA.length).fill(null);
+
+        function loadLatQuestion() {
+            const qData = LATIHAN_SOAL_DATA[latCurrentIndex];
+            document.getElementById('latNum').innerText = latCurrentIndex + 1;
+            document.getElementById('latQuestionText').innerText = qData.q;
+
+            const optionsContainer = document.getElementById('latOptions');
+            optionsContainer.innerHTML = qData.options.map((opt, idx) => {
+                const isSelected = latUserAnswers[latCurrentIndex] === idx;
+                return `
+                    <button onclick="selectLatAnswer(${idx})" class="w-full p-3.5 rounded-xl text-left text-sm font-medium transition border flex items-center ${isSelected ? 'bg-cyan-900/60 border-cyan-400 text-cyan-200' : 'bg-navy-900/80 border-slate-700 text-slate-300 hover:bg-slate-800'}">
+                        <span class="w-6 h-6 rounded-full border border-slate-600 text-xs flex items-center justify-center mr-3 font-bold">${String.fromCharCode(65 + idx)}</span>
+                        ${opt}
+                    </button>
+                `;
+            }).join('');
+
+            // Handle prev button state
+            document.getElementById('btnPrevLat').disabled = latCurrentIndex === 0;
+
+            // Show feedback if already answered
+            const fbBox = document.getElementById('latFeedbackBox');
+            if (latUserAnswers[latCurrentIndex] !== null) {
+                const isCorrect = latUserAnswers[latCurrentIndex] === qData.answer;
+                fbBox.classList.remove('hidden');
+                fbBox.className = `p-4 rounded-xl text-xs space-y-1 ${isCorrect ? 'bg-emerald-950/80 border border-emerald-500 text-emerald-200' : 'bg-rose-950/80 border border-rose-500 text-rose-200'}`;
+                fbBox.innerHTML = `
+                    <p class="font-bold text-sm">${isCorrect ? '<i class="fa-solid fa-check-circle text-emerald-400"></i> Jawaban Anda Benar!' : '<i class="fa-solid fa-times-circle text-rose-400"></i> Jawaban Anda Belum Tepat'}</p>
+                    <p><strong>Pembahasan:</strong> ${qData.exp}</p>
+                `;
+            } else {
+                fbBox.classList.add('hidden');
+            }
+        }
+
+        function selectLatAnswer(idx) {
+            latUserAnswers[latCurrentIndex] = idx;
+            loadLatQuestion();
+        }
+
+        function nextLatQuestion() {
+            if (latCurrentIndex < LATIHAN_SOAL_DATA.length - 1) {
+                latCurrentIndex++;
+                loadLatQuestion();
+            }
+        }
+
+        function prevLatQuestion() {
+            if (latCurrentIndex > 0) {
+                latCurrentIndex--;
+                loadLatQuestion();
+            }
+        }
+
+        // --- MENU 11: EVALUASI MANDIRI (20 SOAL) ---
+        let evalCurrentIndex = 0;
+        let evalUserAnswers = new Array(20).fill(null);
+
+        // Populate 20 questions based on exercises and varieties
+        const EVAL_QUESTIONS = Array.from({ length: 20 }, (_, i) => {
+            const base = LATIHAN_SOAL_DATA[i % LATIHAN_SOAL_DATA.length];
+            return {
+                id: i + 1,
+                q: `Soal Evaluasi #${i + 1}: ${base.q}`,
+                options: base.options,
+                answer: base.answer,
+                exp: base.exp,
+                diff: i % 3 === 0 ? 'Mudah' : i % 3 === 1 ? 'Sedang' : 'Sulit'
+            };
+        });
+
+        function startEvaluasi() {
+            evalCurrentIndex = 0;
+            evalUserAnswers.fill(null);
+            document.getElementById('evalStartBox').classList.add('hidden');
+            document.getElementById('evalResultBox').classList.add('hidden');
+            document.getElementById('evalReviewContainer').classList.add('hidden');
+            document.getElementById('evalQuizBox').classList.remove('hidden');
+            loadEvalQuestion();
+        }
+
+        function loadEvalQuestion() {
+            const q = EVAL_QUESTIONS[evalCurrentIndex];
+            document.getElementById('evalCurrentIndex').innerText = evalCurrentIndex + 1;
+            document.getElementById('evalQuestionText').innerText = q.q;
+            document.getElementById('evalDiffBadge').innerText = q.diff;
+
+            const optionsContainer = document.getElementById('evalOptions');
+            optionsContainer.innerHTML = q.options.map((opt, idx) => {
+                const isSelected = evalUserAnswers[evalCurrentIndex] === idx;
+                return `
+                    <button onclick="selectEvalAnswer(${idx})" class="w-full p-3.5 rounded-xl text-left text-sm font-medium transition border flex items-center ${isSelected ? 'bg-emerald-900/60 border-emerald-400 text-emerald-200' : 'bg-navy-900/80 border-slate-700 text-slate-300 hover:bg-slate-800'}">
+                        <span class="w-6 h-6 rounded-full border border-slate-600 text-xs flex items-center justify-center mr-3 font-bold">${String.fromCharCode(65 + idx)}</span>
+                        ${opt}
+                    </button>
+                `;
+            }).join('');
+
+            document.getElementById('btnPrevEval').disabled = evalCurrentIndex === 0;
+            document.getElementById('btnNextEval').innerText = evalCurrentIndex === 19 ? 'Selesai & Kirim' : 'Berikutnya';
+        }
+
+        function selectEvalAnswer(idx) {
+            evalUserAnswers[evalCurrentIndex] = idx;
+            loadEvalQuestion();
+        }
+
+        function nextEvalQuestion() {
+            if (evalCurrentIndex < 19) {
+                evalCurrentIndex++;
+                loadEvalQuestion();
+            } else {
+                finishEvaluasi();
+            }
+        }
+
+        function prevEvalQuestion() {
+            if (evalCurrentIndex > 0) {
+                evalCurrentIndex--;
+                loadEvalQuestion();
+            }
+        }
+
+        function finishEvaluasi() {
+            let correctCount = 0;
+            evalUserAnswers.forEach((ans, idx) => {
+                if (ans === EVAL_QUESTIONS[idx].answer) correctCount++;
+            });
+
+            const score = (correctCount / 20) * 100;
+
+            let category = '';
+            let feedback = '';
+
+            if (score >= 85) {
+                category = 'Sangat Baik (A)';
+                feedback = 'Luar biasa! Anda telah menguasai seluruh konsep lingkaran dengan sempurna.';
+            } else if (score >= 70) {
+                category = 'Baik (B)';
+                feedback = 'Bagus sekali! Pemahaman Anda sudah cukup baik. Pelajari kembali materi yang masih keliru.';
+            } else if (score >= 55) {
+                category = 'Cukup (C)';
+                feedback = 'Cukup baik. Silakan tingkatkan latihan soal dan perbanyak simulasi interaktif.';
+            } else {
+                category = 'Perlu Bimbingan (D)';
+                feedback = 'Jangan berkecil hati! Ulangi membaca materi pengenalan dan tanyakan kepada Ibu Mariam Hayoto, S.Pd.';
+            }
+
+            document.getElementById('evalScoreValue').innerText = score.toFixed(0);
+            document.getElementById('evalCategoryValue').innerText = category;
+            document.getElementById('evalFeedbackText').innerText = feedback;
+
+            document.getElementById('evalQuizBox').classList.add('hidden');
+            document.getElementById('evalResultBox').classList.remove('hidden');
+        }
+
+        function showEvalReview() {
+            document.getElementById('evalResultBox').classList.add('hidden');
+            const reviewContainer = document.getElementById('evalReviewContainer');
+            reviewContainer.classList.remove('hidden');
+
+            reviewContainer.innerHTML = EVAL_QUESTIONS.map((q, idx) => {
+                const userAns = evalUserAnswers[idx];
+                const isCorrect = userAns === q.answer;
+                return `
+                    <div class="glass-card p-4 rounded-xl border-l-4 ${isCorrect ? 'border-emerald-400' : 'border-rose-500'} space-y-2">
+                        <div class="flex justify-between text-xs text-slate-400">
+                            <span>Soal #${idx + 1} (${q.diff})</span>
+                            <span class="${isCorrect ? 'text-emerald-400 font-bold' : 'text-rose-400 font-bold'}">${isCorrect ? 'BENAR' : 'SALAH'}</span>
+                        </div>
+                        <p class="text-sm font-semibold text-white">${q.q}</p>
+                        <p class="text-xs text-slate-300">Jawaban Anda: <strong class="${isCorrect ? 'text-emerald-400' : 'text-rose-400'}">${userAns !== null ? q.options[userAns] : 'Tidak dijawab'}</strong></p>
+                        <p class="text-xs text-emerald-400">Jawaban Benar: <strong>${q.options[q.answer]}</strong></p>
+                        <p class="text-xs text-slate-400 italic bg-navy-900 p-2 rounded">Pembahasan: ${q.exp}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- MENU 12: REFLEKSI ---
+        function submitRefleksi(e) {
+            e.preventDefault();
+            document.getElementById('formRefleksi').classList.add('hidden');
+            document.getElementById('refleksiSubmittedMsg').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
